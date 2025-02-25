@@ -1,0 +1,56 @@
+
+{{ define "main" }}
+<main>
+
+
+    {{- with .Title }}
+    <h1 class="page-title">{{ . }}</h1>
+    {{- end }}
+
+    {{ .Content }}
+    
+    </br>
+
+    {{ with (where site.RegularPages "Type" "in" site.Params.mainSections) }}
+        {{- $byyear := (where . ".Draft" false).GroupByDate "2006" -}}
+
+        {{- range $byyear -}}
+    <h2>{{ .Key }}</h2>
+
+    <ul>
+        {{ range.Pages }}
+            <li> <time>{{ .Date.Format "02 Jan" }}</time>
+                <span> - </span>
+                <a href="{{ .Permalink }}">
+                    <span>{{ .Title }}</span>
+                </a>
+            </li>
+        {{ end }}
+    </ul>
+        {{- end -}}
+    {{ end }}
+
+    {{ if default true .Site.Params.showTaxonomyLinks }}
+    <div class="taxonomy-links">
+        <ul>
+            {{- /* code for figuring out where to archives page is, if anywhere */ -}}
+            {{ $archivesExists := false }}
+            {{ $archivesPageTitle := "" }}
+            {{ $archivesPagePermalink := "" }}
+            {{ range .Site.AllPages }}
+            {{ end }}
+            {{ if $archivesExists }}
+            <li><a href="{{ $archivesPagePermalink }}">{{ default "Archives" $archivesPageTitle }}</a></li>
+            {{ end }}
+
+            {{ range $taxonomyName, $taxonomy := .Site.Taxonomies }}
+                {{ if or (in $taxonomyName "categ") (in $taxonomyName "tag") }}
+            <li><a href="{{ $taxonomyName | relURL }}">{{ $taxonomyName }}</a></li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+
+</main>
+{{ end }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<main>
+
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    {{ .Content }}
+
+    {{- if .Pages -}}
+        {{- $pages := (where .Pages ".Draft" false) -}}
+
+        {{- /* Use site config params for posts per page if available, otherwise default */ -}}
+        {{- with .Site.Params.list.paginate | default .Site.Params.paginate -}}
+            {{- $pages = $.Paginate $pages . -}}
+        {{- else -}}
+            {{- $pages = .Paginate $pages -}}
+        {{- end -}}
+
+        {{- range $pages.Pages -}}
+            {{ partial "blog-entry-summary.html" . }}
+        {{- end -}}
+
+        {{ partial "pagination.html" . }}
+    {{- end -}}
+</main>
+{{ end }}

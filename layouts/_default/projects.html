@@ -1,0 +1,15 @@
+
+{{ define "main" }}
+<main>
+
+
+    {{- with .Title }}
+    <h1 class="page-title">{{ . }}</h1>
+    {{- end }}
+
+    {{ .Content }}
+    
+    </br>
+
+</main>
+{{ end }}

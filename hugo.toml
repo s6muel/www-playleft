@@ -1,0 +1,34 @@
+baseURL = "https://playleft.com"
+languageCode = "en-us"
+title = "Playleft.com"
+theme = "notrack"
+pagination.pagerSize = 4  # Posts per page, e.g. in the blog
+
+[params]
+author = "Sam Sinclair"
+siteHeading = "playleft" # defaults to author
+favicon = "hugo_grotius.png" # The small icon shown in browser tabs
+showTaxonomyLinks = true  # Show e.g. a "Category" button at top of blog page
+
+# You can choose to display a summary of your blog on the home page. Below are
+# the settings relevant for that.
+showBlogLatest = true  # Whether to show it or not
+mainSections = ["blog"]  # Section name of your blog (folder name)
+blogLatestHeading = "Latest writings"  # Heading above blog summary
+nBlogLatest = 4  # Number of blog post in summary
+
+[params.social]
+email = "hello@mail.playleft.com"
+github = "s6muel"
+bluesky = "@playleft.com"
+mastodon = "@playleft"
+rss = "yes"  # Value doesn't matter - it will always link to your blog RSS
+
+[taxonomies]
+year = "year"
+month = "month"
+tags = "tags"
+categories = "categories"
+
+[permalinks]
+blog = "/blog/:year/:month/:slug"
